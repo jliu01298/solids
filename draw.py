@@ -43,27 +43,27 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     y=round(bot[1])
     A=(top[0]-bot[0])/(top[1]-bot[1])
     B=(top[2]-bot[2])/(top[1]-bot[1])
-    while y<top[1]:
-        if y<round(mid[1]):
-            C=(mid[0]-bot[0])/(mid[1]-bot[1])           
-            D=(mid[2]-bot[2])/(top[1]-bot[1])
-            x0+=A
-            x1+=C
-            z0+=B
-            z1+=D
-            draw_line(x0, y, z0, x1, y, z1, screen, zbuffer, color)
-
-        else:
-            if y<round(top[1]):
-                C=(top[0]-mid[0])/(top[1]-mid[1])           
-                D=(top[2]-mid[2])/(top[1]-mid[1])
-                x0+=A
-                x2+=C
-                z0+=B
-                z2+=D
-                draw_line(x0, y, z0, x2, y, z2, screen, zbuffer, color)
+    while y<round(mid[1]):
+        draw_line(x0, y, z0, x1, y, z1, screen, zbuffer, color)
+        C=(mid[0]-bot[0])/(mid[1]-bot[1])           
+        D=(mid[2]-bot[2])/(top[1]-bot[1])
+        x0+=A
+        x1+=C
+        z0+=B
+        z1+=D
         y+=1
-                                
+
+    while y<round(top[1]):
+        draw_line(x0, y, z0, x2, y, z2, screen, zbuffer, color)
+        C=(top[0]-mid[0])/(top[1]-mid[1])           
+        D=(top[2]-mid[2])/(top[1]-mid[1])
+        x0+=A
+        x2+=C
+        z0+=B
+        z2+=D
+        y+=1
+
+        
             
 def add_polygon( polygons, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     add_point(polygons, x0, y0, z0)
