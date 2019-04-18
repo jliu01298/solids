@@ -44,7 +44,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     A=(top[0]-bot[0])/(top[1]-bot[1])
     B=(top[2]-bot[2])/(top[1]-bot[1])
     while y<round(mid[1]):
-        draw_line(x0, y, z0, x1, y, z1, screen, zbuffer, color)
+        draw_line(round(x0), y, z0, round(x1), y, z1, screen, zbuffer, color)
         C=(mid[0]-bot[0])/(mid[1]-bot[1])           
         D=(mid[2]-bot[2])/(top[1]-bot[1])
         x0+=A
@@ -54,7 +54,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         y+=1
 
     while y<round(top[1]):
-        draw_line(x0, y, z0, x2, y, z2, screen, zbuffer, color)
+        draw_line(round(x0), y, z0, round(x2), y, z2, screen, zbuffer, color)
         C=(top[0]-mid[0])/(top[1]-mid[1])           
         D=(top[2]-mid[2])/(top[1]-mid[1])
         x0+=A
@@ -374,4 +374,4 @@ def draw_line( x0, y0, z0, x1, y1, z1, screen, zbuffer, color ):
             y+= dy_east
             d+= d_east
         loop_start+= 1
-    plot( screen, zbuffer, color, x, y, 0 )
+    plot( screen, zbuffer, color, x, y, z1 )
